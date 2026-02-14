@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Para mi Celi Especial</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #a2d2ff; /* Color azul Stitch */
+            background-image: url('https://i.pinimg.com/originals/7a/6a/8a/7a6a8a2f2670e30129219e7a83705011.gif'); /* Fondo animado Stitch */
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            color: #fff;
+            text-align: center;
+        }
+
+        .overlay {
+            background: rgba(0, 0, 0, 0.4); /* Capa para leer mejor el texto */
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            z-index: 1;
+        }
+
+        .container {
+            position: relative;
+            z-index: 2;
+            padding: 20px;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            text-shadow: 2px 2px 10px rgba(0,0,0,0.5);
+            animation: bounce 2s infinite;
+        }
+
+        .poema-container {
+            height: 150px;
+            margin: 20px 0;
+            overflow: hidden;
+        }
+
+        .poema {
+            font-size: 1.5rem;
+            font-style: italic;
+            animation: moveUp 15s linear infinite;
+        }
+
+        .btn-spotify {
+            background-color: #1DB954;
+            color: white;
+            padding: 15px 30px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 1.2rem;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+            transition: transform 0.3s;
+            display: inline-block;
+            margin-top: 20px;
+        }
+
+        .btn-spotify:hover {
+            transform: scale(1.1);
+            background-color: #1ed760;
+        }
+
+        @keyframes moveUp {
+            0% { transform: translateY(100px); opacity: 0; }
+            10% { opacity: 1; }
+            90% { opacity: 1; }
+            100% { transform: translateY(-150px); opacity: 0; }
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+    </style>
+</head>
+<body>
+    <div class="overlay"></div>
+
+    <div class="container">
+        <h1>¡Feliz San Valentín, Celi! 🧪💙</h1>
+        
+        <div class="poema-container">
+            <div class="poema">
+                "Eres la mezcla perfecta de ternura y fuerza,<br>
+                el análisis más puro de mi corazón.<br>
+                Ni en la mina más profunda hay tesoro igual,<br>
+                porque mi Ohana eres tú, mi amor especial."
+            </div>
+        </div>
+
+        <p style="font-size: 1.1rem; max-width: 500px;">
+            Aunque hoy el trabajo nos separe, esta música nos mantiene unidos.
+        </p>
+
+        <a href="https://open.spotify.com/playlist/6DDXoFCoYEYDD09KqoZKOp?si=dYriXsSUQNWHE2UF1mqxWw" target="_blank" class="btn-spotify">
+            Escuchar Nuestra Playlist 🎧
+        </a>
+    </div>
+</body>
+</html>
