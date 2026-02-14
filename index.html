@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Para mi Celi Especial</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>❤️</text></svg>" type="image/svg+xml">
     <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@500;700&family=Quicksand:wght@400;600&display=swap" rel="stylesheet">
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -148,14 +149,14 @@
 
         .poema-slide {
             display: none;
-            opacity: 0;
-            transform: translateY(15px);
-            transition: opacity 0.8s ease, transform 0.8s ease;
         }
         .poema-slide.active {
             display: block;
-            opacity: 1;
-            transform: translateY(0);
+            animation: fadeSlideIn 0.8s ease-out forwards;
+        }
+        .poema-slide.fade-out {
+            display: block;
+            animation: fadeSlideOut 0.5s ease-in forwards;
         }
 
         .poema {
@@ -205,7 +206,6 @@
             width: 0%;
             background: linear-gradient(90deg, rgba(255,154,220,0.6), rgba(162,210,255,0.6));
             border-radius: 2px;
-            transition: width 0.3s linear;
         }
 
         /* ── Mensaje ── */
@@ -290,6 +290,14 @@
             0% { opacity: 0; transform: scale(0.5); }
             100% { opacity: 1; transform: scale(1.2); }
         }
+        @keyframes fadeSlideIn {
+            from { opacity: 0; transform: translateY(12px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes fadeSlideOut {
+            from { opacity: 1; transform: translateY(0); }
+            to { opacity: 0; transform: translateY(-12px); }
+        }
 
         /* ── Responsive ── */
         @media (max-width: 480px) {
@@ -316,7 +324,8 @@
         <!-- Stitch avatar -->
         <img src="https://i.pinimg.com/originals/d5/72/6e/d5726e3b1f3805b09a7a7abf93aa015e.gif"
              alt="Stitch" class="stitch-img"
-             onerror="this.src='https://i.pinimg.com/736x/b5/bb/a3/b5bba3c0d7a6b2e0bc0b6645c2e2b075.jpg'">
+             loading="eager"
+             onerror="this.onerror=null; this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2280%22>💙</text></svg>';">
 
         <h1>¡Feliz San Valentín, Mi Celi! 🧪💙</h1>
 
@@ -458,23 +467,24 @@
             let elapsed = 0;
             const TICK = 50;
 
+            let transitioning = false;
+
             function goTo(index) {
-                // Fade out current
-                slides[current].style.opacity = '0';
-                slides[current].style.transform = 'translateY(15px)';
-                dots[current].classList.remove('active');
+                if (transitioning || index === current) return;
+                transitioning = true;
+
+                const prev = current;
+                slides[prev].classList.remove('active');
+                slides[prev].classList.add('fade-out');
+                dots[prev].classList.remove('active');
 
                 setTimeout(() => {
-                    slides[current].classList.remove('active');
+                    slides[prev].classList.remove('fade-out');
                     current = index;
                     slides[current].classList.add('active');
                     dots[current].classList.add('active');
-                    // Trigger reflow then animate in
-                    requestAnimationFrame(() => {
-                        slides[current].style.opacity = '1';
-                        slides[current].style.transform = 'translateY(0)';
-                    });
-                }, 400);
+                    transitioning = false;
+                }, 500);
 
                 elapsed = 0;
             }
